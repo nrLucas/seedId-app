@@ -3,6 +3,7 @@ package com.plcoding.landmarkrecognitiontensorflow
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.camera.view.CameraController
@@ -55,6 +56,8 @@ class MainActivity : ComponentActivity() {
                         ),
                         onResults = {
                             classifications = it
+                            Log.d("Teste Sementes", "Classifications: $it")
+
                         }
                     )
                 }
@@ -76,11 +79,11 @@ class MainActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .align(Alignment.TopCenter)
+                            .align(Alignment.BottomCenter)
                     ) {
                         classifications.forEach {
                             Text(
-                                text = it.name,
+                                text = "${it.name} - ${it.score}",
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .background(MaterialTheme.colorScheme.primaryContainer)

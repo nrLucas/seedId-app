@@ -2,6 +2,7 @@ package com.plcoding.landmarkrecognitiontensorflow.data
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.util.Log
 import android.view.Surface
 import com.plcoding.landmarkrecognitiontensorflow.domain.Classification
 import com.plcoding.landmarkrecognitiontensorflow.domain.LandmarkClassifier
@@ -13,8 +14,8 @@ import org.tensorflow.lite.task.vision.classifier.ImageClassifier
 
 class TfLiteLandmarkClassifier(
     private val context: Context,
-    private val threshold: Float = 0.5f,
-    private val maxResults: Int = 3
+    private val threshold: Float = 0.1f,
+    private val maxResults: Int = 10
 ): LandmarkClassifier {
 
     private var classifier: ImageClassifier? = null
@@ -32,7 +33,7 @@ class TfLiteLandmarkClassifier(
         try {
             classifier = ImageClassifier.createFromFileAndOptions(
                 context,
-                "landmarks.tflite",
+                "model.tflite",
                 options
             )
         } catch (e: IllegalStateException) {
@@ -53,11 +54,13 @@ class TfLiteLandmarkClassifier(
             .build()
 
         val results = classifier?.classify(tensorImage, imageProcessingOptions)
+        Log.d("results", ": ${results}")
 
         return results?.flatMap { classications ->
             classications.categories.map { category ->
+
                 Classification(
-                    name = category.displayName,
+                    name = category.label,
                     score = category.score
                 )
             }
