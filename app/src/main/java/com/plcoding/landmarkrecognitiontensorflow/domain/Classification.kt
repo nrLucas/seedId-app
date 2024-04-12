@@ -1,6 +1,6 @@
 package com.plcoding.landmarkrecognitiontensorflow.domain
 
-data class Classification(
+data class    Classification(
     val name: String,
     val score: Float
 )
