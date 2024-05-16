@@ -14,8 +14,9 @@ import org.tensorflow.lite.task.vision.classifier.ImageClassifier
 
 class TfLiteLandmarkClassifier(
     private val context: Context,
+    private val modelType: String,
     private val threshold: Float = 0.1f,
-    private val maxResults: Int = 1
+    private val maxResults: Int = 3
 ): LandmarkClassifier {
 
     private var classifier: ImageClassifier? = null
@@ -30,10 +31,17 @@ class TfLiteLandmarkClassifier(
             .setScoreThreshold(threshold)
             .build()
 
+        Log.d("modelPath", modelType)
+
+        val modelPath = when (modelType) {
+            "popular" -> "popular.tflite"
+            else -> "model.tflite"  // Default to científico
+        }
+
         try {
             classifier = ImageClassifier.createFromFileAndOptions(
                 context,
-                "model.tflite",
+                modelPath,
                 options
             )
         } catch (e: IllegalStateException) {
@@ -54,7 +62,7 @@ class TfLiteLandmarkClassifier(
             .build()
 
         val results = classifier?.classify(tensorImage, imageProcessingOptions)
-        Log.d("results", ": ${results}")
+        //Log.d("results", ": ${results}")
 
         return results?.flatMap { classications ->
             classications.categories.map { category ->

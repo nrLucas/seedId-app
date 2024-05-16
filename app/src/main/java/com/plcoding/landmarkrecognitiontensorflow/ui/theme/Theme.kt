@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
+    primary = GreenJC,
     secondary = PurpleGrey80,
     tertiary = Pink80
 )
@@ -57,7 +57,7 @@ fun LandmarkRecognitionTensorflowTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
+            window.statusBarColor = GreenJC.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }
@@ -69,21 +69,3 @@ fun LandmarkRecognitionTensorflowTheme(
     )
 }
 
-@Composable
-fun NavigationDrawerComposeTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
-) {
-    val colors = if (darkTheme) {
-        DarkColorScheme
-    } else {
-        LightColorScheme
-    }
-
-    MaterialTheme(
-        colorScheme = colors,
-        typography = Typography,
-        shapes = Shapes,
-        content = content
-    )
-}
