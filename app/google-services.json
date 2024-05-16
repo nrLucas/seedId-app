@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1047307569620",
+    "project_id": "seedclassificationtensorflow",
+    "storage_bucket": "seedclassificationtensorflow.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047307569620:android:f8a03ea84f685362ab6e41",
+        "android_client_info": {
+          "package_name": "com.plcoding.landmarkrecognitiontensorflow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXBW90drx9HinyM-zKmnWcf1yCXEXn8uQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
